@@ -44,6 +44,8 @@ class RecipesFragment : Fragment() {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
+        setupRecyclerView()
+        requestApiData()
         return binding.root
 
 
@@ -54,11 +56,11 @@ class RecipesFragment : Fragment() {
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
             when(response){
                 is NetworkResult.Success -> {
-                    hideShimmerEffect()
+
                     response.data?.let { mAdapter.setData(it) }
                 }
                 is NetworkResult.Error -> {
-                    hideShimmerEffect()
+
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -66,7 +68,7 @@ class RecipesFragment : Fragment() {
                     ).show()
                 }
                 is NetworkResult.Loading ->{
-                    showShimmerEffect()
+
                 }
             }
         })
@@ -74,20 +76,10 @@ class RecipesFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.recyclerview.adapter = mAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        showShimmerEffect()
+
     }
 
-    private fun showShimmerEffect() {
-        binding.shimmerFrameLayout.startShimmer()
-        binding.shimmerFrameLayout.visibility = View.VISIBLE
-        binding.recyclerview.visibility = View.GONE
-    }
 
-    private fun hideShimmerEffect() {
-        binding.shimmerFrameLayout.stopShimmer()
-        binding.shimmerFrameLayout.visibility = View.GONE
-        binding.recyclerview.visibility = View.VISIBLE
-    }
 
 
 
