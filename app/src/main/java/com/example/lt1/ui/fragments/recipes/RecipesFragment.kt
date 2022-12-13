@@ -53,7 +53,7 @@ class RecipesFragment : Fragment() {
 
     private fun requestApiData() {
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner,{ response ->
             when(response){
                 is NetworkResult.Success -> {
 
