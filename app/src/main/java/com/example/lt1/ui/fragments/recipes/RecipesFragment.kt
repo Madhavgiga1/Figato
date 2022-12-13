@@ -1,12 +1,14 @@
 package com.example.lt1.ui.fragments.recipes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lt1.viewmodels.MainViewModel
@@ -14,8 +16,10 @@ import com.example.lt1.R
 import com.example.lt1.adapters.RecipesAdapter
 import com.example.lt1.databinding.FragmentRecipesBinding
 import com.example.lt1.util.NetworkResult
+import com.example.lt1.util.observeOnce
 import com.example.lt1.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -45,7 +49,7 @@ class RecipesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
         setupRecyclerView()
-        requestApiData()
+        readDatabase()
         return binding.root
 
 
@@ -72,6 +76,19 @@ class RecipesFragment : Fragment() {
                 }
             }
         })
+    }
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    Log.d("RecipesFragment", "readDatabase called!")
+                    mAdapter.setData(database[0].foodRecipe)
+
+                } else {
+                    requestApiData()
+                }
+            })
+        }
     }
     private fun setupRecyclerView() {
         binding.recyclerview.adapter = mAdapter

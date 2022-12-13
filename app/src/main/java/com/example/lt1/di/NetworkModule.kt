@@ -1,4 +1,4 @@
-package com.example.lt1
+package com.example.lt1.di
 
 import com.example.lt1.util.Constants.Companion.BASE_URL
 import com.example.lt1.data.network.FoodRecipesApi
