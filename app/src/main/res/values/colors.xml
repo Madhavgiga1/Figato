@@ -28,7 +28,7 @@
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
 
-    // Custom Chip Style
+    // Custom Chip Style // Custom Chip Style
     <color name="checkedChipBackgroundColor">#206200EA</color>
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="checkedChipTextColor">@color/colorPrimary</color>

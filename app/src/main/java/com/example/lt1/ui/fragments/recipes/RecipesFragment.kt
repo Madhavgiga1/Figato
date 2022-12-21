@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lt1.viewmodels.MainViewModel
@@ -24,37 +26,36 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
-    //private val args by navArgs<RecipesFragmentArgs>()
+    private val args by navArgs<RecipesFragmentArgs>()
+
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var mainViewModel: MainViewModel
     private val mAdapter by lazy { RecipesAdapter() }
     private lateinit var mView:View
     private lateinit var recipesViewModel: RecipesViewModel
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
     }
-    override fun onCreateView(
 
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
         setupRecyclerView()
         readDatabase()
+        binding.recipesFab.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+        }
         return binding.root
-
-
     }
-
     private fun requestApiData() {
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner,{ response ->
@@ -64,15 +65,11 @@ class RecipesFragment : Fragment() {
                     response.data?.let { mAdapter.setData(it) }
                 }
                 is NetworkResult.Error -> {
-
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-                is NetworkResult.Loading ->{
-
                 }
             }
         })
@@ -80,7 +77,7 @@ class RecipesFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty()) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("RecipesFragment", "readDatabase called!")
                     mAdapter.setData(database[0].foodRecipe)
 
@@ -95,11 +92,17 @@ class RecipesFragment : Fragment() {
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
     }
-
-
-
-
-
-
-
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, {database->
+                if (database.isNotEmpty()) {
+                    mAdapter.setData(database[0].foodRecipe)
+                }
+            })
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
