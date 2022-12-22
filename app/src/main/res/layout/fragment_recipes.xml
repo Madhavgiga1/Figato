@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         tools:context=".ui.fragments.recipes.RecipesFragment"
         android:layout_width="match_parent"
-        android:background="@color/bottomNavBackground"
+        android:background="#CA323B43"
         android:layout_height="match_parent">
 
 
