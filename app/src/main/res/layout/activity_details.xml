@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/detailsLayout"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar">
+        </androidx.appcompat.widget.Toolbar>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            style="@style/CustomTabLayoutStyle"
+            android:layout_height="match_parent"
+            android:id="@+id/tabLayout"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:tabTextAppearance="@style/CustomTabTextStyle">
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar">
+    </androidx.viewpager.widget.ViewPager>
+    <!--viewpager will hold the three fragments that is details,ingredients and instruction
+     A ViewPager is a layout widget that is used to display pages of scrollable content in Android apps.
+      It is often used in conjunction with a FragmentPagerAdapter or FragmentStatePagerAdapter,
+       which provides the pages to the ViewPager and manages the Fragments that represent each page.
+       The ViewPager allows the user to swipe left or right to navigate between pages,
+       and it can also be configured to display a tab indicator that shows the current page
+       and allows the user to tap to navigate to a different page.-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
