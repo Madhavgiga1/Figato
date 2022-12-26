@@ -2,7 +2,7 @@
     <!-- used to define a theme,they control general apperance,can be applied on toolbar,app,actvity or fragment  -->
     <style name="Theme.LT1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">#666A57</item>
         <item name="colorPrimaryVariant">@color/dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
