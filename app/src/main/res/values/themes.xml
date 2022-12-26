@@ -23,6 +23,7 @@
     <style name="DetailsActivityStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/GunmetalGray</item>
         <item name="colorPrimaryVariant">@color/dark</item>
+        <item name="colorPrimaryDark">@color/dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorAccent">@color/chipTextColor</item>
         <item name="colorControlNormal">@color/white</item>
