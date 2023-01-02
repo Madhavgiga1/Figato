@@ -27,6 +27,7 @@ data class Result(
 
     @SerializedName("id")
     val id: Int,
+
     @SerializedName("image")
     val image: String,
 

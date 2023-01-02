@@ -12,9 +12,9 @@ import com.example.lt1.util.RecipesDiffUtil
 class RecipesAdapter():RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     private var recipes = emptyList<Result>()
 
-    /*in Recipe list you have collection of recipes which have all the parameer that are there in result model calss which we get from API.Recycler view displays  collection of item where each
+    /*in Recipe list you have collection of recipes which have all the parameter that are there in result model class which we get from API.Recycler view displays  collection of item where each
     item has a layout specified.When it needs to display an item Recycler View tells adapter to create a ViewHolder which will hold parent element of items layout and also bind data from collection
-    of recipes to the viewholder.Recipes is a list of recipes,in the on bindview holder we pas sthe current recipe as a parameter to the Myviewholder classes bind function,
+    of recipes to the viewholder.Recipes is a list of recipes,in the on bindview holder we pass the current recipe as a parameter to the Myviewholder classes bind function,
     tune jo bhi layout liya h uske data binding layout me tune variable mention kiya h Result model apan wo hi parameter pass kar rhe h
     */
     class MyViewHolder(private val binding: RecipesRowLayoutBinding) :
@@ -23,7 +23,7 @@ class RecipesAdapter():RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
                 binding.result=result
                 binding.executePendingBindings()
             }
-            companion object{
+            companion object{/*Companion objects are useful in situations where you need to define a static method or property that can be accessed without having to create an instance of the class.*/
                 fun from(parent: ViewGroup):MyViewHolder{
                     val layoutInflater=LayoutInflater.from(parent.context)
                     val binding=RecipesRowLayoutBinding.inflate(layoutInflater,parent,false)

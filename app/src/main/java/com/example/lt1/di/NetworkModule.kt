@@ -51,5 +51,7 @@ object NetworkModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): FoodRecipesApi {
         return retrofit.create(FoodRecipesApi::class.java)
-    }
+    }/*the method creates and returns an instance of the FoodRecipesApi interface by calling the create() method on the Retrofit instance and passing the
+    FoodRecipesApi interface as a parameter. The create() method creates an implementation of the FoodRecipesApi interface that is backed by a Retrofit instance, and it can be used to
+    call the methods defined in the FoodRecipesApi interface to retrieve data from the REST API.*/
 }

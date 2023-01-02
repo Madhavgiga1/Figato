@@ -13,7 +13,6 @@ import com.example.lt1.data.database.entities.RecipesEntity
 )
 @TypeConverters(RecipesTypeConverter::class)
 abstract class RecipesDatabase: RoomDatabase() {
-
     abstract fun recipesDao(): RecipesDao
 
 }
