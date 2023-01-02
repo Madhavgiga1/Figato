@@ -80,8 +80,11 @@ class DetailsActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home) {
             finish()
         }
-        else if(item.itemId==R.id.save_to_favorites_menu){
+        else if(item.itemId==R.id.save_to_favorites_menu && !recipeSaved){
             saveToFavorites(item)
+        }
+        else if(item.itemId==R.id.save_to_favorites_menu && recipeSaved){
+            removeFromFavorites(item)
         }
 
         return super.onOptionsItemSelected(item)
@@ -114,11 +117,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun removeFromFavorites(item: MenuItem) {
-        val favoritesEntity =
-            FavoritesEntity(
-                savedRecipeId,
-                args.result
-            )
+        val favoritesEntity = FavoritesEntity(savedRecipeId, args.result)
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.white)
         showSnackBar("Removed from Favorites.")
