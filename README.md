@@ -1,6 +1,6 @@
 # Figato
-Android App that lets you browse recipes from various different kind of meal and diet types.  Our app we will be able to search recipes from our API directly
-We also have Favorites Fragment where we can save our favorite recipes for later use when we need them
+Android App that lets you browse recipes from various different kind of meal and diet types.  My app will be able to search recipes from the API directly
+The app also has a Favorites Fragment where you can save our favorite recipes for later use when you need them
 
 ![Untitled](https://user-images.githubusercontent.com/77728555/214916695-c1f43683-f950-4868-8262-a303e616be76.png)
 
